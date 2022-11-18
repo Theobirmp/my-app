@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Home from './pages/Home';
+import Form from './pages/Form';
+import Data from './pages/Data';
+import { AnimatePresence } from 'framer-motion';
+import { DarkModeProvider } from './theme/DarkModeContext';
 function App() {
+  const location = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <DarkModeProvider>
+        <AnimatePresence>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/form" element={<Form />} />
+            <Route path="/data" element={<Data />} />
+          </Routes>
+        </AnimatePresence>
+      </DarkModeProvider>
+    </>
   );
 }
 
